@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace NekoJourney.Models
 {
-    public partial class NekoContext : DbContext
+    public partial class NekoContext : IdentityDbContext
     {
         public NekoContext()
         {
@@ -85,6 +86,7 @@ namespace NekoJourney.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
