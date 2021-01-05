@@ -2284,8 +2284,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(~/images/coffeeheader.png) center;
-  background-size: cover;
+    background: url(../images/coffeefooter.png) center;
+    background-size: cover;
 }
 
 @media (max-width: 1199.98px) {
@@ -2296,7 +2296,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 @media (max-width: 768px) {
     .banner-area {
-        background: url(~/images/coffeeheader.png);
+        background: url(~/images/catheader.jpg);
         background-position: 50% 90% 50% 50%;
     }
 }
