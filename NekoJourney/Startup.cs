@@ -45,6 +45,23 @@ namespace NekoJourney
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultUI()
                 .AddEntityFrameworkStores<NekoContext>().AddDefaultTokenProviders();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("readOnlyPolicy",
+                    builder => builder.RequireRole("Admin", "User"));
+                options.AddPolicy("writePolicy",
+                    builder => builder.RequireRole("Admin", "User"));
+                options.AddPolicy("editPolicy",
+                    builder => builder.RequireRole("Admin"));
+                options.AddPolicy("deletePolicy",
+                    builder => builder.RequireRole("Admin"));
+            });
+
+            services.AddScoped<Review>();
+            services.AddScoped<User>();
+            services.AddScoped<Admin>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

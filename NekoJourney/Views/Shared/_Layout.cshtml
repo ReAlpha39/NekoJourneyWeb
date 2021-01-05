@@ -54,8 +54,17 @@
             <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/coffee1.png" height="40" alt="" title="" /></a>
         </div>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-menu"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-            <li class="nav-menu"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-menu"><a asp-area="" asp-controller="Role" asp-action="Index">Role</a></li>
+                <li class="nav-menu"><a asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
+                <li class="nav-menu"><a asp-area="" asp-controller="Reviews" asp-action="Index">Reviews</a></li>
+                <li class="nav-menu"><a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a></li>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <li class="nav-menu"><a asp-area="" asp-controller="Reviews" asp-action="Index">Reviews</a></li>
+            }
         </ul>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

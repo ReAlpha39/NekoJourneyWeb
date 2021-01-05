@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace NekoJourney.Controllers
         }
 
         // GET: Reviews
+        [Authorize(Policy = "readOnlyPolicy")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Review.ToListAsync());
@@ -43,6 +45,7 @@ namespace NekoJourney.Controllers
         }
 
         // GET: Reviews/Create
+        [Authorize(Policy = "writePolicy")]
         public IActionResult Create()
         {
             return View();
@@ -85,6 +88,7 @@ namespace NekoJourney.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "editPolicy")]
         public async Task<IActionResult> Edit(int id, [Bind("IdReview,Nama,Review1")] Review review)
         {
             if (id != review.IdReview)
@@ -116,6 +120,7 @@ namespace NekoJourney.Controllers
         }
 
         // GET: Reviews/Delete/5
+        [Authorize(Policy = "deletePolicy")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
